@@ -12,9 +12,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int totalSeconds = 1500;
   bool isRunning = false;
+  int totalPmodoros = 0;
   late Timer timer;
 
   void onTick(Timer timer) {
+    if(totalSeconds == 0){
+      setState(() {
+        totalPmodoros = totalPmodoros + 1;
+        isRunning = false;
+        totalSeconds = 1500;
+      });
+    }
     setState(() {
       totalSeconds = totalSeconds - 1;
     });
@@ -92,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            '0',
+                            '$totalPmodoros',
                             style: TextStyle(
                               fontSize: 58,
                               fontWeight: FontWeight.w600,
